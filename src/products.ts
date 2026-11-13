@@ -1,0 +1,572 @@
+export type Fit = "men" | "women" | "kids";
+
+export type ClothingCategory =
+  | "t-shirt"
+  | "shirt"
+  | "hoodie"
+  | "pants"
+  | "shorts";
+
+export type ClothingSize = "XS" | "S" | "M" | "L" | "XL" | "XXL";
+
+export interface ClothingProduct {
+  id: number;
+  name: string;
+  image: string;
+  fit: Fit;
+  category: ClothingCategory;
+  color: string;
+  description: string;
+  size: ClothingSize;
+  price: number;
+  quantity: number;
+  itemQuantity: number;
+}
+
+// Automatically load all 50 product images
+const productImages = import.meta.glob<string>(
+  "./assets/images/images/product-*.png",
+  {
+    eager: true,
+    query: "?url",
+    import: "default",
+  }
+);
+
+type ProductData = Omit<
+  ClothingProduct,
+  "id" | "image" | "itemQuantity"
+>;
+
+const productData: ProductData[] = [
+  // T-SHIRTS
+  {
+    name: "Navy Essential Crew Tee",
+    fit: "men",
+    category: "t-shirt",
+    color: "Navy",
+    description: "Navy Essential Crew Tee for men in navy.",
+    size: "XL",
+    price: 9,
+    quantity: 6,
+  },
+  {
+    name: "Grey Everyday Crew Tee",
+    fit: "men",
+    category: "t-shirt",
+    color: "Heather Grey",
+    description: "Grey Everyday Crew Tee for men in heather grey.",
+    size: "M",
+    price: 12,
+    quantity: 10,
+  },
+  {
+    name: "Black Classic Crew Tee",
+    fit: "men",
+    category: "t-shirt",
+    color: "Black",
+    description: "Black Classic Crew Tee for men in black.",
+    size: "XXL",
+    price: 15,
+    quantity: 10,
+  },
+  {
+    name: "Olive Pocket Tee",
+    fit: "men",
+    category: "t-shirt",
+    color: "Olive",
+    description: "Olive Pocket Tee for men in olive.",
+    size: "L",
+    price: 18,
+    quantity: 8,
+  },
+  {
+    name: "Rose V-Neck Tee",
+    fit: "women",
+    category: "t-shirt",
+    color: "Rose",
+    description: "Rose V-Neck Tee for women in rose.",
+    size: "S",
+    price: 13,
+    quantity: 5,
+  },
+  {
+    name: "White V-Neck Tee",
+    fit: "women",
+    category: "t-shirt",
+    color: "White",
+    description: "White V-Neck Tee for women in white.",
+    size: "XL",
+    price: 16,
+    quantity: 7,
+  },
+  {
+    name: "Burgundy V-Neck Tee",
+    fit: "women",
+    category: "t-shirt",
+    color: "Burgundy",
+    description: "Burgundy V-Neck Tee for women in burgundy.",
+    size: "L",
+    price: 20,
+    quantity: 9,
+  },
+  {
+    name: "Blue Dinosaur Graphic Tee",
+    fit: "kids",
+    category: "t-shirt",
+    color: "Blue",
+    description: "Blue Dinosaur Graphic Tee for kids in blue.",
+    size: "S",
+    price: 23,
+    quantity: 7,
+  },
+  {
+    name: "Pink Heart Graphic Tee",
+    fit: "kids",
+    category: "t-shirt",
+    color: "Pink",
+    description: "Pink Heart Graphic Tee for kids in pink.",
+    size: "XL",
+    price: 29,
+    quantity: 4,
+  },
+  {
+    name: "Grey Construction Truck Tee",
+    fit: "kids",
+    category: "t-shirt",
+    color: "Heather Grey",
+    description: "Grey Construction Truck Tee for kids in heather grey.",
+    size: "M",
+    price: 20,
+    quantity: 5,
+  },
+
+  // SHIRTS
+  {
+    name: "Red Plaid Flannel Shirt",
+    fit: "men",
+    category: "shirt",
+    color: "Red and Navy",
+    description: "Red Plaid Flannel Shirt for men in red and navy.",
+    size: "XXL",
+    price: 23,
+    quantity: 6,
+  },
+  {
+    name: "Light Blue Oxford Shirt",
+    fit: "men",
+    category: "shirt",
+    color: "Light Blue",
+    description: "Light Blue Oxford Shirt for men in light blue.",
+    size: "L",
+    price: 27,
+    quantity: 1,
+  },
+  {
+    name: "Navy Short-Sleeve Button-Down",
+    fit: "men",
+    category: "shirt",
+    color: "Navy",
+    description: "Navy Short-Sleeve Button-Down for men in navy.",
+    size: "S",
+    price: 24,
+    quantity: 4,
+  },
+  {
+    name: "Green Plaid Flannel Shirt",
+    fit: "men",
+    category: "shirt",
+    color: "Green and White",
+    description: "Green Plaid Flannel Shirt for men in green and white.",
+    size: "XXL",
+    price: 28,
+    quantity: 0,
+  },
+  {
+    name: "Cream Floral Button-Down",
+    fit: "women",
+    category: "shirt",
+    color: "Cream",
+    description: "Cream Floral Button-Down for women in cream.",
+    size: "L",
+    price: 19,
+    quantity: 10,
+  },
+  {
+    name: "Blue Chambray Shirt",
+    fit: "women",
+    category: "shirt",
+    color: "Denim Blue",
+    description: "Blue Chambray Shirt for women in denim blue.",
+    size: "S",
+    price: 22,
+    quantity: 5,
+  },
+  {
+    name: "Black and White Striped Blouse",
+    fit: "women",
+    category: "shirt",
+    color: "Black and White",
+    description: "Black and White Striped Blouse for women in black and white.",
+    size: "XL",
+    price: 14,
+    quantity: 1,
+  },
+  {
+    name: "Blue Plaid School Shirt",
+    fit: "kids",
+    category: "shirt",
+    color: "Blue and Green",
+    description: "Blue Plaid School Shirt for kids in blue and green.",
+    size: "M",
+    price: 17,
+    quantity: 5,
+  },
+  {
+    name: "Pink Plaid School Shirt",
+    fit: "kids",
+    category: "shirt",
+    color: "Pink",
+    description: "Pink Plaid School Shirt for kids in pink.",
+    size: "XXL",
+    price: 20,
+    quantity: 2,
+  },
+  {
+    name: "Light Blue Printed Shirt",
+    fit: "kids",
+    category: "shirt",
+    color: "Light Blue",
+    description: "Light Blue Printed Shirt for kids in light blue.",
+    size: "L",
+    price: 14,
+    quantity: 10,
+  },
+
+  // HOODIES
+  {
+    name: "Black Pullover Hoodie",
+    fit: "men",
+    category: "hoodie",
+    color: "Black",
+    description: "Black Pullover Hoodie for men in black.",
+    size: "S",
+    price: 10,
+    quantity: 4,
+  },
+  {
+    name: "Grey Fleece Hoodie",
+    fit: "men",
+    category: "hoodie",
+    color: "Heather Grey",
+    description: "Grey Fleece Hoodie for men in heather grey.",
+    size: "XL",
+    price: 13,
+    quantity: 5,
+  },
+  {
+    name: "Navy Pullover Hoodie",
+    fit: "men",
+    category: "hoodie",
+    color: "Navy",
+    description: "Navy Pullover Hoodie for men in navy.",
+    size: "M",
+    price: 15,
+    quantity: 8,
+  },
+  {
+    name: "Forest Green Hoodie",
+    fit: "men",
+    category: "hoodie",
+    color: "Forest Green",
+    description: "Forest Green Hoodie for men in forest green.",
+    size: "XS",
+    price: 22,
+    quantity: 8,
+  },
+  {
+    name: "Blush Pink Pullover Hoodie",
+    fit: "women",
+    category: "hoodie",
+    color: "Blush Pink",
+    description: "Blush Pink Pullover Hoodie for women in blush pink.",
+    size: "L",
+    price: 15,
+    quantity: 2,
+  },
+  {
+    name: "Lavender Pullover Hoodie",
+    fit: "women",
+    category: "hoodie",
+    color: "Lavender",
+    description: "Lavender Pullover Hoodie for women in lavender.",
+    size: "S",
+    price: 18,
+    quantity: 6,
+  },
+  {
+    name: "Cream Pullover Hoodie",
+    fit: "women",
+    category: "hoodie",
+    color: "Cream",
+    description: "Cream Pullover Hoodie for women in cream.",
+    size: "XL",
+    price: 25,
+    quantity: 7,
+  },
+  {
+    name: "Blue Dinosaur Hoodie",
+    fit: "kids",
+    category: "hoodie",
+    color: "Blue",
+    description: "Blue Dinosaur Hoodie for kids in blue.",
+    size: "L",
+    price: 29,
+    quantity: 9,
+  },
+  {
+    name: "Pink Heart Hoodie",
+    fit: "kids",
+    category: "hoodie",
+    color: "Pink",
+    description: "Pink Heart Hoodie for kids in pink.",
+    size: "S",
+    price: 33,
+    quantity: 5,
+  },
+  {
+    name: "Green Tractor Hoodie",
+    fit: "kids",
+    category: "hoodie",
+    color: "Green",
+    description: "Green Tractor Hoodie for kids in green.",
+    size: "XL",
+    price: 17,
+    quantity: 0,
+  },
+
+  // PANTS
+  {
+    name: "Blue Straight-Leg Jeans",
+    fit: "men",
+    category: "pants",
+    color: "Blue Denim",
+    description: "Blue Straight-Leg Jeans for men in blue denim.",
+    size: "M",
+    price: 21,
+    quantity: 0,
+  },
+  {
+    name: "Black Straight-Leg Pants",
+    fit: "men",
+    category: "pants",
+    color: "Black",
+    description: "Black Straight-Leg Pants for men in black.",
+    size: "XS",
+    price: 25,
+    quantity: 9,
+  },
+  {
+    name: "Tan Chino Pants",
+    fit: "men",
+    category: "pants",
+    color: "Tan",
+    description: "Tan Chino Pants for men in tan.",
+    size: "L",
+    price: 16,
+    quantity: 4,
+  },
+  {
+    name: "Olive Cargo Pants",
+    fit: "men",
+    category: "pants",
+    color: "Olive",
+    description: "Olive Cargo Pants for men in olive.",
+    size: "S",
+    price: 20,
+    quantity: 3,
+  },
+  {
+    name: "Classic Blue Denim Jeans",
+    fit: "women",
+    category: "pants",
+    color: "Blue Denim",
+    description: "Classic Blue Denim Jeans for women in blue denim.",
+    size: "XS",
+    price: 13,
+    quantity: 1,
+  },
+  {
+    name: "Black Wide-Leg Trousers",
+    fit: "women",
+    category: "pants",
+    color: "Black",
+    description: "Black Wide-Leg Trousers for women in black.",
+    size: "L",
+    price: 6,
+    quantity: 5,
+  },
+  {
+    name: "Cream Wide-Leg Trousers",
+    fit: "women",
+    category: "pants",
+    color: "Cream",
+    description: "Cream Wide-Leg Trousers for women in cream.",
+    size: "S",
+    price: 7,
+    quantity: 1,
+  },
+  {
+    name: "Blue Kids Jeans",
+    fit: "kids",
+    category: "pants",
+    color: "Blue Denim",
+    description: "Blue Kids Jeans for kids in blue denim.",
+    size: "XL",
+    price: 9,
+    quantity: 8,
+  },
+  {
+    name: "Pink Pull-On Leggings",
+    fit: "kids",
+    category: "pants",
+    color: "Pink",
+    description: "Pink Pull-On Leggings for kids in pink.",
+    size: "M",
+    price: 15,
+    quantity: 9,
+  },
+  {
+    name: "Grey Kids Joggers",
+    fit: "kids",
+    category: "pants",
+    color: "Heather Grey",
+    description: "Grey Kids Joggers for kids in heather grey.",
+    size: "XS",
+    price: 11,
+    quantity: 1,
+  },
+
+  // SHORTS
+  {
+    name: "Navy Drawstring Shorts",
+    fit: "men",
+    category: "shorts",
+    color: "Navy",
+    description: "Navy Drawstring Shorts for men in navy.",
+    size: "L",
+    price: 13,
+    quantity: 2,
+  },
+  {
+    name: "Tan Casual Shorts",
+    fit: "men",
+    category: "shorts",
+    color: "Tan",
+    description: "Tan Casual Shorts for men in tan.",
+    size: "M",
+    price: 19,
+    quantity: 3,
+  },
+  {
+    name: "Black Cargo Shorts",
+    fit: "men",
+    category: "shorts",
+    color: "Black",
+    description: "Black Cargo Shorts for men in black.",
+    size: "XS",
+    price: 22,
+    quantity: 4,
+  },
+  {
+    name: "Olive Cargo Shorts",
+    fit: "men",
+    category: "shorts",
+    color: "Olive",
+    description: "Olive Cargo Shorts for men in olive.",
+    size: "L",
+    price: 26,
+    quantity: 9,
+  },
+  {
+    name: "Blue Denim Shorts",
+    fit: "women",
+    category: "shorts",
+    color: "Blue Denim",
+    description: "Blue Denim Shorts for women in blue denim.",
+    size: "S",
+    price: 13,
+    quantity: 4,
+  },
+  {
+    name: "Black Tie-Waist Shorts",
+    fit: "women",
+    category: "shorts",
+    color: "Black",
+    description: "Black Tie-Waist Shorts for women in black.",
+    size: "XL",
+    price: 16,
+    quantity: 7,
+  },
+  {
+    name: "Coral Drawstring Shorts",
+    fit: "women",
+    category: "shorts",
+    color: "Coral",
+    description: "Coral Drawstring Shorts for women in coral.",
+    size: "M",
+    price: 19,
+    quantity: 0,
+  },
+  {
+    name: "Navy Athletic Shorts",
+    fit: "kids",
+    category: "shorts",
+    color: "Navy",
+    description: "Navy Athletic Shorts for kids in navy.",
+    size: "XS",
+    price: 10,
+    quantity: 0,
+  },
+  {
+    name: "Pink Drawstring Shorts",
+    fit: "kids",
+    category: "shorts",
+    color: "Pink",
+    description: "Pink Drawstring Shorts for kids in pink.",
+    size: "XL",
+    price: 12,
+    quantity: 5,
+  },
+  {
+    name: "Blue Denim Shorts",
+    fit: "kids",
+    category: "shorts",
+    color: "Blue Denim",
+    description: "Blue Denim Shorts for kids in blue denim.",
+    size: "M",
+    price: 9,
+    quantity: 0,
+  },
+];
+
+// Create all products and connect their images
+export const products: ClothingProduct[] = productData.map(
+  (product, index) => {
+    const imagePath =
+      `./assets/images/images/product-${index + 1}.png`;
+
+    const image = productImages[imagePath];
+
+    if (!image) {
+      console.error(`Missing image: product-${index + 1}.png`);
+    }
+
+    return {
+      id: index,
+      ...product,
+      image: image ?? "",
+      itemQuantity: 0,
+    };
+  }
+);
